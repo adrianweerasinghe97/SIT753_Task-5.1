@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    environment {
+        // Defining the environment variables
+        DIRECTORY_PATH = 'E:/Deakin/Lectures/2024/Trimester 1 2024/SIT753/Jenkins/Task 5.1/jenkinsfile'
+        TESTING_ENVIRONMENT = 'testing'
+        PRODUCTION_ENVIRONMENT = 'Adrian'  
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo "Fetch the source code from the directory path specified by the : ${DIRECTORY_PATH} variable"
+                echo 'Compile the code and generate any necessary artifacts'
+            }    
+
+        }
+        stage('Test') {
+            steps {
+                echo 'Performing unit tests'
+                echo 'Performing integration tests'
+            }
+        }
+        stage('Code Quality Check') {
+            steps {
+                echo 'Check the quality of the code'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                    echo "Deploy the application to the testing environment: ${TESTING_ENVIRONMENT} specified by the environment variable"
+            }
+        }
+        stage('Approval') {
+            steps {
+                sleep time: 10, unit: 'SECONDS'
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the code to the production environment: ${PRODUCTION_ENVIRONMENT}"
+
+            }
+        }
+    }
+}
